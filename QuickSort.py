@@ -1,18 +1,35 @@
 import random
-import time
-c=0;
-def createArray(size):
+
+def createAnArray(size): 
+    import random
     array=[]
-    for i in range(0, size):
+    for i in range(0,size):
         array.append(int(random.uniform(-1000,1000)))
     return array
-        
+
+
 def quickSort(alist):
    quickSortHelper(alist,0,len(alist)-1)
 
 def quickSortHelper(alist,first,last):
    if first<last:
 
+       splitpoint = partition(alist,first,last)
+
+       quickSortHelper(alist,first,splitpoint-1)
+       quickSortHelper(alist,splitpoint+1,last)
+
+
+sayac=0
+def quickSort(alist):
+   quickSortHelper(alist,0,len(alist)-1)
+   global sayac
+   return sayac
+
+def quickSortHelper(alist,first,last):
+  
+   if first<last:
+    
        splitpoint = partition(alist,first,last)
 
        quickSortHelper(alist,first,splitpoint-1)
@@ -30,13 +47,13 @@ def partition(alist,first,last):
 
        while leftmark <= rightmark and alist[leftmark] <= pivotvalue:
            leftmark = leftmark + 1
-           global c
-           c=c+1
+           global sayac
+           sayac=sayac+1
 
        while alist[rightmark] >= pivotvalue and rightmark >= leftmark:
            rightmark = rightmark -1
-           global c
-           c=c-1
+           global sayac
+           sayac=sayac+1
 
        if rightmark < leftmark:
            done = True
@@ -51,13 +68,20 @@ def partition(alist,first,last):
 
 
    return rightmark
-   
 
-size=int(input("size ?"))
-alist=createArray(size)
-print(alist)
-t1 = time.time()
-quickSort(alist)
-print("time:", time.time() - t1)
-print(alist)
 
+size=int(input("dizinin boyutu ne olsun"))
+array1=[]
+import random
+for i in range(0,size):
+    array1.append(random.randint(-10,10))
+
+print("dizinin boyutu : ",len(array1))
+print("dizinin elemanları ")
+for i in range(0,size):
+    print(i,".  ",array1[i])
+    
+import time
+start_time1=time.time()
+print("quick sort  sonucu :", quickSort(array1))
+print("gecen süre : ", time.time()-start_time1)
