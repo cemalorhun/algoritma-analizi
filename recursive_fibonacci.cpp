@@ -1,48 +1,38 @@
-#include <iostream>
+#include<stdio.h>
+#include<time.h>
+int Fibonacci(int);
+ 
+main()
+{
+   clock_t start, end;
 
-using namespace std;
+   start=clock();
+   
+   int n, i = 0, c;
+   
+   printf("Fibonacci series=> ");
+   scanf("%d",&n);
+ 
+   for ( c = 1 ; c <= n ; c++ )
+   {
+      printf("%d\n", Fibonacci(i));
+      i++; 
+   }
+   
+   end = clock();
 
-
-//recursive fib = 2^N
-int fib(int n){
-    if(n<=1)
-	    return 1;
-    else
-	    return fib(n-1)+fib(n-2);
+   printf("Gecen Sure: %f",(double)(end-start)/CLOCKS_PER_SEC);
+ 
+   return 0;
 }
-
-//
-
-//fib = N
-int fibbonacci(int n){
-    if(n<=1)
-	    return 1;
-
-    int last = 1;
-    int nextToLast = 1;
-    int answer = 1;
-
-    for(int i = 2; i<=n; i++){
-	answer = last + nextToLast;
-	nextToLast = last;
-	last = answer;
-    
-    }
-    return answer;
+ 
+int Fibonacci(int n)
+{
+   if ( n == 0 )
+      return 0;
+   else if ( n == 1 )
+      return 1;
+   else
+      return ( Fibonacci(n-1) + Fibonacci(n-2) );
 }
-
-//
-// ortalama fonksiyonu N=1
-
-int ortalama(int a, int b, int c){
-
-	return (a+b+c)/3;
-
-}
-
-
-int main (){
-    cout << fib(40) << endl;
-    cout << fibbonacci(40) << endl;
-    cout << ortalama(100, 200, 300); << endl;
-}
+ 
